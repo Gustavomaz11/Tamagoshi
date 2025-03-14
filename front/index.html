@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tamagoshi</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="vue.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div id="app">
+
+    <div v-if="!inicio" id="saudacao">
+      <h1>Bem Vindo ao Tamagoshi</h1>
+      <h2>Regras do Jogo:</h2>
+      <ul>
+        <li>A cada minuto você perde 0.5 de vida</li>
+        <li>A cada minuto você perde 0.3 de sono</li>
+        <li>A cada minuto você perde 1.75 de fome</li>
+      </ul>
+      <input type="text" v-model="nomeTamagoshi" placeholder="Digite o nome do seu personagem">
+      <button @click="iniciarJogo">Iniciar Jogo</button>
+    </div>
+
+    <div v-else>
+
+      <p>Nome: {{nomeTamagoshi}}</p>
+
+      <div class="barra">
+        <p>Vida: {{totalVida.toFixed(1)}}%</p>
+        <div class="barra-container">
+          <div class="barra-progresso" :style="{width: totalVida + '%'}"></div>
+        </div>
+      </div>
+
+      <div class="barra">
+        <p>Sono: {{totalSono.toFixed(1)}}%</p>
+        <div class="barra-container">
+          <div class="barra-progresso" :style="{width: totalSono + '%'}"></div>
+        </div>
+      </div>
+
+      <div class="barra">
+        <p>Fome: {{totalFome.toFixed(1)}}%</p>
+        <div class="barra-container">
+          <div class="barra-progresso" :style="{width: totalFome + '%'}"></div>
+        </div>
+      </div>
+
+      <div class="barra">
+        <p>Idade: {{idade}}</p>
+      </div>
+
+      <button @click="alimentar">Alimentar</button>
+      <button @click="dormir">{{dormindo ? 'Acordar' : 'Dormir'}}</button>
+
+    </div>
+
+  </div>
+</body>
+
+</html>
